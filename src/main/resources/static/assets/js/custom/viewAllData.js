@@ -191,33 +191,6 @@ function getAllData(){
         "responsive": true,
         "autoWidth": false,
         "pageLength": 10,
-        "ajax" : {
-                    "url" : 'getFileData.php',
-                    "type" : "POST",
-                    "data" : {
-                    "action" : "getAllData"
-                }
-        },
-        "columns" : [ {
-          "className" : 'details-control',
-          "orderable" : false,
-          "data" : null,
-          "defaultContent" : ''
-      },
-
-      {
-          "data" : "First Name"
-      }, {
-          "data" : "Last Name"
-      }, {
-          "data" : "file_name"
-      }, {
-          "data" : "edit"
-      }, {
-          "data" : "delete"
-      }
-
-      ],
       "order" : [ [ 1, 'asc' ] ]
       });
 }

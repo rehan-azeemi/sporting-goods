@@ -1,8 +1,6 @@
 package com.sporting.goods.model;
 
-import java.sql.Timestamp;
 import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -26,7 +24,7 @@ public class Employee {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date lastModified;
 	@Column
-	private int active;
+	private Integer active;
 	
 	public Long getUserId() {
 		return userId;
@@ -61,7 +59,7 @@ public class Employee {
 	public int getActive() {
 		return active;
 	}
-	public void setActive(int active) {
+	public void setActive(Integer active) {
 		this.active = active;
 	}
 }

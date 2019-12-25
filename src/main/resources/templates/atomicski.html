@@ -12,18 +12,17 @@
 
 <link rel="apple-touch-icon" href="apple-icon.png">
 <link rel="shortcut icon" href="favicon.ico">
-<link rel="stylesheet" href="assets/css/bootstrap-datepicker3.css">
-<link rel="stylesheet" href="assets/css/normalize.css">
-<link rel="stylesheet" href="assets/css/bootstrap.min.css">
-<link rel="stylesheet" href="assets/css/font-awesome.min.css">
-<link rel="stylesheet" href="assets/css/themify-icons.css">
-<link rel="stylesheet" href="assets/css/flag-icon.min.css">
-<link rel="stylesheet" href="assets/css/cs-skin-elastic.css">
-<link rel="stylesheet"
-	href="assets/css/lib/datatable/dataTables.bootstrap.min.css">
-<link rel="stylesheet" href="assets/scss/style.css">
-<link href="assets/css/lib/vector-map/jqvmap.min.css" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/lib/chosen/chosen.min.css">
+<link rel="stylesheet" th:href="@{/assets/css/bootstrap-datepicker3.css}">
+<link rel="stylesheet" th:href="@{/assets/css/normalize.css}">
+<link rel="stylesheet"  th:href="@{/assets/css/bootstrap.min.css}">
+<link rel="stylesheet"  th:href="@{/assets/css/font-awesome.min.css}">
+<link rel="stylesheet" th:href="@{/assets/css/themify-icons.css}">
+<link rel="stylesheet" th:href="@{/assets/css/flag-icon.min.css}">
+<link rel="stylesheet"  th:href="@{/assets/css/cs-skin-elastic.css}">
+<link rel="stylesheet" th:href="@{/assets/css/lib/datatable/dataTables.bootstrap.min.css}">
+<link rel="stylesheet" th:href="@{/assets/scss/style.css}">
+<link th:href="@{/assets/css/lib/vector-map/jqvmap.min.css}" rel="stylesheet">
+<link rel="stylesheet" th:href="@{/assets/css/lib/chosen/chosen.min.css}">
 <!-- CSS -->
 <link rel="stylesheet"
 	href="//cdn.jsdelivr.net/npm/alertifyjs@1.11.1/build/css/alertify.min.css" />
@@ -70,9 +69,9 @@ tr.shown td.details-control {
 					aria-expanded="false" aria-label="Toggle navigation">
 					<i class="fa fa-bars"></i>
 				</button>
-				<a class="navbar-brand" href="./"><img src="images/logo.png"
+				<a class="navbar-brand" href="./"><img th:src="@{/images/logo.png}"
 					alt="Logo"></a> <a class="navbar-brand hidden" href="./"><img
-					src="images/logo2.png" alt="Logo"></a>
+					th:src="@{/images/logo2.png}" alt="Logo"></a>
 			</div>
 
 			<div id="main-menu" class="main-menu collapse navbar-collapse">
@@ -127,36 +126,36 @@ tr.shown td.details-control {
 							<div class="form-row">
 								<div class="form-group col-md-6">
 									<label for="inputEmail4">First Name</label> <input type="text"
-										class="form-control" name="firstName" placeholder="First Name">
+										class="form-control" name="firstName" placeholder="First Name" th:field="*{firstName}">
 								</div>
 								<div class="form-group col-md-6">
 									<label for="inputPassword4">Last Name</label> <input
 										type="text" class="form-control" name="lastName"
-										placeholder="Last Name">
+										placeholder="Last Name" th:field="*{lastName}">
 								</div>
 							</div>
 							<div class="form-row">
 								<div class="form-group col-md-6">
 									<label for="inputCity">Email</label> <input type="email"
-										class="form-control" name="email" placeholder="Email">
+										class="form-control" name="email" placeholder="Email" th:field="*{email}">
 								</div>
 								<div class="form-group col-md-6">
 									<label for="inputZip">Phone</label> <input type="text"
-										class="form-control" name="phone" placeholder="Phone">
+										class="form-control" name="phone" placeholder="Phone" th:field="*{phone}">
 								</div>
 							</div>
 							<div class="form-group">
 								<label for="inputAddress">Address</label> <input type="text"
 									class="form-control" name="address"
-									placeholder="Address">
+									placeholder="Address" th:field="*{address}">
 							</div>
 							<div class="form-row">
 								<div class="form-group col-md-6">
 									<label for="inputCity">City</label> <input type="text"
-										class="form-control" name="city" placeholder="City">
+										class="form-control" name="city" placeholder="City" th:field="*{city}">
 								</div>
 								<div class="form-group col-md-4">
-									<label for="inputState">State</label> <select name="stateId"
+									<label for="inputState">State</label> <select name="stateId" th:field="*{stateId}"
 										class="standardSelect form-control" data-placeholder="Choose a File..." tabindex="1">
 										
 										<option th:each="state : ${states}"
@@ -166,30 +165,30 @@ tr.shown td.details-control {
 								</div>
 								<div class="form-group col-md-2">
 									<label for="inputZip">Zip</label> <input type="text"
-										class="form-control" name="zipCode" placeholder="Zip">
+										class="form-control" name="zipCode" placeholder="Zip" th:field="*{zipCode}">
 								</div>
 							</div>
 							
 							<div class="form-row">
 								<div class="form-group col-md-6">
 									<label for="inputState">Can we contact you by texting ?</label> <select name="canWeContact"
-										class="form-control">
+										class="form-control" th:field="*{canWeContact}">
 										<option value="1" selected>Yes</option>
 										<option value="0" >No</option>
 									</select>
 								</div>
 								<div class="form-group col-md-6">
 									<label for="inputZip">Local Accommodations</label> <input type="text"
-										class="form-control" name="localAccomodation" placeholder="Local Accomodation">
+										class="form-control" name="localAccomodation" placeholder="Local Accomodation" th:field="*{localAccomodation}">
 								</div>
 							</div>
 							<div class="form-row">
 								<div class="form-group col-md-6">
 									<label for="inputZip">Driver's License #</label> <input type="text"
-										class="form-control" name="drivingLicenseNo" placeholder="Driving License No">
+										class="form-control" name="drivingLicenseNo" placeholder="Driving License No" th:field="*{drivingLicenseNo}">
 								</div>
 								<div class="form-group col-md-6">
-									<label for="inputState">Driving License State</label> <select name="drivingLicenseStateId"
+									<label for="inputState">Driving License State</label> <select name="drivingLicenseStateId" th:field="*{drivingLicenseStateId}"
 										class="standardSelect form-control" data-placeholder="Choose a File..." tabindex="1">
 										<option th:each="state : ${states}"
                             th:value="${state.stateId}"
@@ -200,26 +199,26 @@ tr.shown td.details-control {
 							<div class="form-row">
 								<div class="form-group col-md-3">
 									<label for="inputZip">Weight</label> <input type="text"
-										class="form-control" name="weight" placeholder="Weight">
+										class="form-control" name="weight" placeholder="Weight" th:field="*{weight}">
 								</div>
 								<div class="form-group col-md-3">
 									<label for="inputZip">Height</label> <input type="text"
-										class="form-control" name="height" placeholder="Height">
+										class="form-control" name="height" placeholder="Height" th:field="*{height}">
 								</div>
 								<div class="form-group col-md-3">
 									<label for="inputZip">Birthdate</label> <input type="text"
-										class="form-control" name="dateOfBirth" id="dob">
+										class="form-control" name="dateOfBirth" id="dob" th:field="*{dateOfBirth}">
 								</div>
 								<div class="form-group col-md-3">
 									<label for="inputZip">Age</label> <input type="text"
-										class="form-control" name="age" placeholder="age" id="age" readonly="readonly">
+										class="form-control" name="age" placeholder="age" id="age" readonly="readonly" th:field="*{age}">
 								</div>
 							</div>
 							
 							<div class="form-row">
 								
 								<div class="form-group col-md-6">
-									<label for="inputState">Down hill Skiing Level</label> <select name="downHillSkiingLevel"
+									<label for="inputState">Down hill Skiing Level</label> <select name="downHillSkiingLevel" th:field="*{downHillSkiingLevel}"
 										class="form-control">
 										<option value="TYPE_I" selected>Type I</option>
 										<option value="TYPE_II">Type II</option>
@@ -227,7 +226,7 @@ tr.shown td.details-control {
 									</select>
 								</div>
 								<div class="form-group col-md-6">
-									<label for="inputState">Snowboard Stance</label> <select name="snowboardStance"
+									<label for="inputState">Snowboard Stance</label> <select name="snowboardStance" th:field="*{snowboardStance}"
 										class="form-control">
 										<option value="REGULAR" selected>Regular</option>
 										<option value="GOOFY">Goofy</option>
@@ -238,67 +237,67 @@ tr.shown td.details-control {
 							<div class="form-row">
 								<div class="form-group col-md-3">
 									<label for="inputZip">Boot ID #</label> <input type="text"
-										class="form-control" name="bootIdNo" placeholder="Boot ID No">
+										class="form-control" name="bootIdNo" placeholder="Boot ID No" th:field="*{bootIdNo}">
 								</div>
 								<div class="form-group col-md-3">
 									<label for="inputZip">Sole Length</label> <input type="text"
-										class="form-control" name="SoleLength" placeholder="Sole Length">
+										class="form-control" name="SoleLength" placeholder="Sole Length" th:field="*{SoleLength}">
 								</div>
 								<div class="form-group col-md-3">
 									<label for="inputZip">Ski/Board ID #</label> <input type="text"
-										class="form-control" name="skiBoardIdNo" placeholder="Ski Board ID No">
+										class="form-control" name="skiBoardIdNo" placeholder="Ski Board ID No" th:field="*{skiBoardIdNo}">
 								</div>
 								<div class="form-group col-md-3">
 									<label for="inputZip">Pole Code</label> <input type="text"
-										class="form-control" name="poleCode" placeholder="Pole Code">
+										class="form-control" name="poleCode" placeholder="Pole Code" th:field="*{poleCode}">
 								</div>
 							</div>
 							<div class="form-row">
 								<div class="form-group col-md-6">
 									<label for="inputZip">Date Out</label> <input type="text"
-										class="form-control" name="dateOut" id="dateOut">
+										class="form-control" name="dateOut" id="dateOut" th:field="*{dateOut}">
 								</div>
 								<div class="form-group col-md-6">
 									<label for="inputZip">Date Due</label> <input type="text"
-										class="form-control" name="dateDue" id="dateDue">
+										class="form-control" name="dateDue" id="dateDue" th:field="*{dateDue}">
 								</div>
 								
 							</div>
 							<div class="form-row">
 								<div class="form-group col-md-6">
 									<label for="inputZip">Visual Indicator Settings</label> <input type="text"
-										class="form-control" name="visualIndicatorSettings" placeholder="Visual Indicator Settings">
+										class="form-control" name="visualIndicatorSettings" placeholder="Visual Indicator Settings" th:field="*{visualIndicatorSettings}">
 								</div>
 								<div class="form-group col-md-6">
 									<label for="inputZip">Requested Settings</label> <input type="text"
-										class="form-control" name="requestedSettings" placeholder="Requested Settings">
+										class="form-control" name="requestedSettings" placeholder="Requested Settings" th:field="*{requestedSettings}">
 								</div>
 								
 							</div>
 							<div class="form-row">
 								<div class="form-group col-md-4">
 									<label for="inputZip">Equipment Subtotal</label> <input type="text"
-										class="form-control" name="equipmentSubtotal" placeholder="Equipment Subtotal">
+										class="form-control" name="equipmentSubtotal" placeholder="Equipment Subtotal" th:field="*{equipmentSubtotal}">
 								</div>
 								<div class="form-group col-md-4">
 									<label for="inputZip">Equipment Damage Protection</label> <input type="text"
-										class="form-control" name="equipmentProtectionDamage" placeholder="Equipment Protection Damage">
+										class="form-control" name="equipmentProtectionDamage" placeholder="Equipment Protection Damage" th:field="*{equipmentProtectionDamage}">
 								</div>
 								<div class="form-group col-md-4">
 									<label for="inputZip">Total</label> <input type="text"
-										class="form-control" name="total" placeholder="Total">
+										class="form-control" name="total" placeholder="Total" th:field="*{total}">
 								</div>
 							</div>
 							<div class="form-row">
 								<div class="form-group col-md-6">
 									<label for="inputZip">Technician</label> <input type="text"
-										class="form-control" name="technician" placeholder="Technician">
+										class="form-control" name="technician" placeholder="Technician" th:field="*{technician}">
 								</div>
 								<div class="form-group col-md-6">
-									<label for="inputState">Release of Liability Signed</label> <select name="releaseOfSignedLiability"
+									<label for="inputState">Release of Liability Signed</label> <select name="releaseOfSignedLiability" th:field="*{releaseOfSignedLiability}"
 										class="form-control">
-										<option selected>Yes</option>
-										<option>No</option>
+										<option value="1" selected>Yes</option>
+										<option value="0" >No</option>
 									</select>
 								</div>
 								
@@ -306,7 +305,7 @@ tr.shown td.details-control {
 							<div class="form-row">
 								<div class="form-group col-md-12">
 									<label for="inputZip">Note</label> <input type="text"
-										class="form-control" name="note" placeholder="Note">
+										class="form-control" name="note" placeholder="Note" th:field="*{note}">
 								</div>
 								
 								
@@ -365,27 +364,27 @@ tr.shown td.details-control {
 	</div>
 	<!-- /#right-panel -->
 
-	<script src="assets/js/vendor/jquery-2.1.4.min.js"></script>
+	<script th:src="@{/assets/js/vendor/jquery-2.1.4.min.js}"></script>
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
-	<script src="assets/js/plugins.js"></script>
-	<script src="assets/js/main.js"></script>
-	<script src="assets/js/dashboard.js"></script>
-	<script src="assets/js/lib/data-table/datatables.min.js"></script>
-	<script src="assets/js/lib/data-table/dataTables.bootstrap.min.js"></script>
-	<script src="assets/js/lib/data-table/dataTables.buttons.min.js"></script>
-	<script src="assets/js/lib/data-table/buttons.bootstrap.min.js"></script>
-	<script src="assets/js/lib/data-table/jszip.min.js"></script>
-	<script src="assets/js/lib/data-table/pdfmake.min.js"></script>
-	<script src="assets/js/lib/data-table/vfs_fonts.js"></script>
-	<script src="assets/js/lib/data-table/buttons.html5.min.js"></script>
-	<script src="assets/js/lib/data-table/buttons.print.min.js"></script>
-	<script src="assets/js/lib/data-table/buttons.colVis.min.js"></script>
-	<script src="assets/js/lib/data-table/datatables-init.js"></script>
-	<script src="assets/js/lib/bootstrap-datepicker.js"></script>
-	<script src="assets/js/lib/bootstrap-datepicker.de.min.js"></script>
-	<script src="assets/js/lib/jquery.inputmask.bundle.min.js"></script>
-	<script src="assets/js/lib/chosen/chosen.jquery.min.js"></script>
+	<script th:src="@{/assets/js/plugins.js}"></script>
+	<script th:src="@{/assets/js/main.js}"></script>
+	<script th:src="@{/assets/js/dashboard.js}"></script>
+	<script th:src="@{/assets/js/lib/data-table/datatables.min.js}"></script>
+	<script th:src="@{/assets/js/lib/data-table/dataTables.bootstrap.min.js}"></script>
+	<script th:src="@{/assets/js/lib/data-table/dataTables.buttons.min.js}"></script>
+	<script th:src="@{/assets/js/lib/data-table/buttons.bootstrap.min.js}"></script>
+	<script th:src="@{/assets/js/lib/data-table/jszip.min.js}"></script>
+	<script th:src="@{/assets/js/lib/data-table/pdfmake.min.js}"></script>
+	<script th:src="@{/assets/js/lib/data-table/vfs_fonts.js}"></script>
+	<script th:src="@{/assets/js/lib/data-table/buttons.html5.min.js}"></script>
+	<script th:src="@{/assets/js/lib/data-table/buttons.print.min.js}"></script>
+	<script th:src="@{/assets/js/lib/data-table/buttons.colVis.min.js}"></script>
+	<script th:src="@{/assets/js/lib/data-table/datatables-init.js}"></script>
+	<script th:src="@{/assets/js/lib/bootstrap-datepicker.js}"></script>
+	<script th:src="@{/assets/js/lib/bootstrap-datepicker.de.min.js}"></script>
+	<script th:src="@{/assets/js/lib/jquery.inputmask.bundle.min.js}"></script>
+	<script th:src="@{/assets/js/lib/chosen/chosen.jquery.min.js}"></script>
 	<script
 		src="//cdn.jsdelivr.net/npm/alertifyjs@1.11.1/build/alertify.min.js"></script>
 	<script type="text/javascript"
@@ -463,10 +462,6 @@ tr.shown td.details-control {
 
 		});
 		  
-		  $('#dob').datepicker('setDate', 'today');
-		  $('#dateOut').datepicker('setDate', 'today');
-		  $('#dateDue').datepicker('setDate', 'today');
-		  
 		function calculate_age(dob) { 
 			    var diff_ms = Date.now() - dob.getTime();
 			    var age_dt = new Date(diff_ms); 
@@ -485,6 +480,11 @@ tr.shown td.details-control {
 	        "pageLength": 10,
 	      "order" : [ [ 1, 'asc' ] ]
 	      });
+	</script>
+	<script th:if="${atomicski.atomicSkiId == null}">
+	  $('#dob').datepicker('setDate', 'today');
+	  $('#dateOut').datepicker('setDate', 'today');
+	  $('#dateDue').datepicker('setDate', 'today');
 	</script>
 </body>
 </html>

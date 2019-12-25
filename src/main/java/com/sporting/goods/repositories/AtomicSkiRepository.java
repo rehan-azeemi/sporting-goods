@@ -14,4 +14,7 @@ public interface AtomicSkiRepository extends CrudRepository<AtomicSki,Long>{
 			")",nativeQuery = false)
 	public List<AtomicSkiDTO> fetchLastRecordByCustomers();
 	public AtomicSki findByAtomicSkiId(Long atomicSkiId);
+	public List<AtomicSki> findAll();
+	@Query("select distinct email from AtomicSki")
+	public List<String> findAllEmails();
 }

@@ -412,4 +412,22 @@ public class AtomicSki {
 	public void setNote(String note) {
 		this.note = note;
 	}
+
+	@Override
+	public String toString() {
+		return "AtomicSki [atomicSkiId=" + atomicSkiId + ", firstName=" + firstName + ", lastName=" + lastName
+				+ ", city=" + city + ", phone=" + phone + ", address=" + address + ", email=" + email + ", stateId="
+				+ stateId + ", zipCode=" + zipCode + ", canWeContact=" + canWeContact + ", localAccomodation="
+				+ localAccomodation + ", drivingLicenseNo=" + drivingLicenseNo + ", drivingLicenseStateId="
+				+ drivingLicenseStateId + ", age=" + age + ", dateOfBirth=" + dateOfBirth + ", weight=" + weight
+				+ ", height=" + height + ", downHillSkiingLevel=" + downHillSkiingLevel + ", snowboardStance="
+				+ snowboardStance + ", bootIdNo=" + bootIdNo + ", soleLength=" + soleLength + ", skiBoardIdNo="
+				+ skiBoardIdNo + ", poleCode=" + poleCode + ", dateOut=" + dateOut + ", dateDue=" + dateDue
+				+ ", visualIndicatorSettings=" + visualIndicatorSettings + ", requestedSettings=" + requestedSettings
+				+ ", equipmentSubtotal=" + equipmentSubtotal + ", equipmentProtectionDamage="
+				+ equipmentProtectionDamage + ", total=" + total + ", technician=" + technician
+				+ ", releaseOfSignedLiability=" + releaseOfSignedLiability + ", note=" + note + ", lastModifiedBy="
+				+ lastModifiedBy + ", lastModified=" + lastModified + ", active=" + active + "]";
+	}
+	
 }

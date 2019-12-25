@@ -1,6 +1,6 @@
 package com.sporting.goods.model;
 
-import javax.persistence.Column;
+
 
 public class AtomicSkiDTO {
 	private Long atomicSkiId;

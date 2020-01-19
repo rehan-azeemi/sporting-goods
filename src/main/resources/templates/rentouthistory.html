@@ -69,22 +69,26 @@ tr.shown td.details-control {
 					aria-expanded="false" aria-label="Toggle navigation">
 					<i class="fa fa-bars"></i>
 				</button>
-				<a class="navbar-brand" href="./"><img th:src="@{/images/logo.png}"
-					alt="Logo"></a> <a class="navbar-brand hidden" href="./"><img
-					th:src="@{/images/logo2.png}" alt="Logo"></a>
+				<a class="navbar-brand" href="./">Atomic Ski</a><a class="navbar-brand hidden" href="./"></a>
 			</div>
 
 			<div id="main-menu" class="main-menu collapse navbar-collapse">
 				<ul class="nav navbar-nav">
-					<li class="active"><a href="dashboard.php"> <i
+					<li class="active"><a href="#"> <i
 							class="menu-icon fa fa-dashboard"></i>Dashboard
 					</a></li>
 					<h3 class="menu-title">Sporting Goods Menu</h3>
-					<li><a href="data-entry.php"> <i
+					<li th:if="${#request.isUserInRole('ROLE_ADMIN')}" ><a th:href="@{/employee}"> <i
+							class="menu-icon fa fa-laptop"></i>Employee
+					</a></li>
+					<li><a th:href="@{/rentout}"> <i
 							class="menu-icon fa fa-laptop"></i>Rent Out
 					</a></li>
-					<li><a href="viewAllData.php"> <i
+					<li><a th:href="@{/rentouthistory}"> <i
 							class="menu-icon fa fa-laptop"></i>Rent Out History
+					</a></li>
+					<li><a th:href="@{/atomicski/export}"> <i
+							class="menu-icon fa fa-laptop"></i>Export Customer Emails
 					</a></li>
 				</ul>
 			</div>
@@ -108,9 +112,9 @@ tr.shown td.details-control {
 					<a id="menuToggle" class="menutoggle pull-left"><i
 						class="fa fa fa-tasks"></i></a>
 				</div>
-				<button class="btn-logout pull-right" id="logout">
+				<a class="btn-logout pull-right" th:href="@{/logout}">
 					<i class="fa fa-sign-out"></i> Logout
-				</button>
+				</a>
 			</div>
 		</header>
 		<div class="content mt-3">
@@ -125,16 +129,21 @@ tr.shown td.details-control {
 							class="table table-striped table-bordered">
 							<thead>
 								<tr>
-									<th>Full Detail</th>
 									<th>First Name</th>
 									<th>Last Name</th>
 									<th>Email</th>
 									<th>Phone</th>
-									<th>City</th>
+									<th>Logs History</th>
 								</tr>
 							</thead>
 							<tbody>
-								
+								<tr th:each="atmski : ${atomicskies}">
+									<td th:text="${atmski.firstName}"></td>
+									<td th:text="${atmski.lastName}"></td>
+									<td th:text="${atmski.email}"></td>
+									<td th:text="${atmski.phone}"></td>
+									<td><a th:href="@{/atomicski/logs/{id}(id=${atmski.atomicSkiId})}" class="btn btn-danger btn-sm">Get History Logs</a></td>
+								</tr>
 							</tbody>
 						</table>
 						</div>
@@ -208,70 +217,18 @@ tr.shown td.details-control {
 						}
 					}
 				});
-	</script>
-	<script>
-	 $('#rent-out-data-table').DataTable({
-         "paging": true,
-         "lengthChange": true,
-         "searching": true,
-         "ordering": true,
-         "info": false,
-         "responsive": true,
-         "autoWidth": false,
-         "pageLength": 10,
-         "ajax" : {
-                     "url" : 'rentouthistorydata',
-                     "type" : "GET"
-         },
-         "columns" : [ {
-           "className" : 'details-control',
-           "orderable" : false,
-           "data" : null,
-           "defaultContent" : ''
-       },
- 
-       {
-           "data" : "firstName"
-       }, {
-           "data" : "lastName"
-       }, {
-           "data" : "email"
-       }, {
-           "data" : "phone"
-       }, {
-           "data" : "city"
-       }
- 
-       ],
-       "order" : [ [ 1, 'asc' ] ]
-       });
-	
-	 $('#rent-out-data-table tbody').on('click', 'td.details-control',
-             function() {
-                 var tr = $(this).closest('tr');
-                 var row = $('#rent-out-data-table').DataTable().row(tr);
-
-                 if (row.child.isShown()) {
-                     // This row is already open - close it
-                     row.child.hide();
-                     tr.removeClass('shown');
-                 } else {
-                     // Open this row
-                     row.child(format(row.data())).show();
-                     tr.addClass('shown');
-                 }
-});
-	
-	function format(d) {
-	    // `d` is the original data object for the row
-	    return '<table cellpadding="0" cellspacing="0" border="0" style="padding-left:0px;">'
-	            + '<tr>'
-	            + '<td>City</td>'
-	            + '<td>'+d.city+'</td>'
-	            + '</tr>'
-	            
-	            + '</table>';
-	}
+		
+		$('#rent-out-data-table').DataTable({
+	        "paging": true,
+	        "lengthChange": true,
+	        "searching": true,
+	        "ordering": true,
+	        "info": false,
+	        "responsive": true,
+	        "autoWidth": false,
+	        "pageLength": 10,
+	      "order" : [ [ 0, 'asc' ] ]
+	      });
 	</script>
 </body>
 </html>

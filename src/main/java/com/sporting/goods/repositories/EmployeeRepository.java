@@ -11,4 +11,5 @@ import com.sporting.goods.model.Employee;
 public interface EmployeeRepository extends CrudRepository<Employee, Long>{
 	public List<Employee> findByActive(Integer active);
 	public Employee findByUserId(Long userId);
+	public Employee findByUsername(String username);
 }

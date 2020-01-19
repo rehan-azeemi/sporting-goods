@@ -27,18 +27,21 @@ public class AtomicSkiController {
 		view.addObject("atomicski", new AtomicSki());
 		view.addObject("states", stateService.getAllStates());
 		view.addObject("atomicskies", atomicSkiServices.getAllLastRecordByEachCustomer());
+		
 		return view;
 	}
 	
 	@GetMapping("/rentouthistory")
 	public ModelAndView getRentoutHistory() {
 		ModelAndView view = new ModelAndView("rentouthistory");
+		view.addObject("atomicskies",atomicSkiServices.getAllLastRecordByEachCustomer());
 		return view;
 	}
 	
 	@PostMapping("/atomicski/save")
 	public String saveAtomicSki(@ModelAttribute("atomicski") AtomicSki atomicSki) {
-		atomicSkiServices.saveAtomicSki(atomicSki);
+		Long id = atomicSkiServices.saveAtomicSki(atomicSki);
+		atomicSkiServices.generateForm(id);
 		return "redirect:/rentout";
 	}
 	
@@ -50,11 +53,19 @@ public class AtomicSkiController {
 		return "atomicski";
 	}
 	
+	@GetMapping("/atomicski/logs/{atomicSkiId}")
+	public ModelAndView fetchLogsOfCustomers(@PathVariable Long atomicSkiId) {
+		ModelAndView view = new ModelAndView("rentouthistoryofcustomer");
+		view.addObject("atomicski", atomicSkiId);
+		return view;
+	}
+	
 	@GetMapping("/atomicski/export")
-	public String generateExcelForAllEmails() {	
-		if(!atomicSkiServices.generateExcelForEmails()) {
-			
-		}
-		return  "redirect:/rentout";
+	public ModelAndView generateExcelForAllEmails() {	
+//		if(!atomicSkiServices.generateExcelForEmails()) {
+//			
+//		}
+		ModelAndView view = new ModelAndView("exportexcel");
+		return view;
 	}
 }

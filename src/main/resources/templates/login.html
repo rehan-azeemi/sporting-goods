@@ -1,14 +1,11 @@
 <!doctype html>
-<html class="no-js" lang=""> 
+<html class="no-js" lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
-<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
-<c:if test="${sessionScope.email != null}">
-    <c:redirect url = "dashboard.jsp"/>
-</c:if>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>News Portal</title>
-    <meta name="description" content="News Portal">
+    <title>Sporting Goods</title>
+    <meta name="description" content="Lead Smith - Maintain Excel Files Record">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="apple-touch-icon" href="apple-icon.png">
@@ -31,38 +28,34 @@
     <div class="sufee-login d-flex align-content-center flex-wrap">
         <div class="container">
             <div class="login-content">
-                <div class="login-logo">
-                    <a href="index.html">
-                        <img class="align-content" src="images/logo.png" alt="">
-                    </a>
-                </div>
+                
                 <div class="login-form">
                     
                         <div class="form-group">
-                            <label>Email address</label>
-                            <input type="email" class="form-control" placeholder="Email" id="email">
+                        <form th:action="@{/login}" method="post">
+                            <label>Username</label>
+                            <input type="text" class="form-control" placeholder="Username" name="username">
                         </div>
                         <div class="form-group">
                             <label>Password</label>
-                            <input type="password" class="form-control" placeholder="Password" id="password">
+                            <input type="password" class="form-control" placeholder="Password" name="password">
                         </div>
-                        <div class="checkbox">
-                            <label>
-                                <input type="checkbox"> Remember Me
-                            </label>
-                            <label class="pull-right">
-                                <a href="#">Forgotten Password?</a>
-                            </label>
-
-                        </div>
-                        <button type="submit" class="btn btn-success btn-flat m-b-30 m-t-30" id="sign-in-btn">Sign in</button>
-                   
+                        
+                        <button type="submit" class="btn btn-success btn-flat m-b-30 m-t-30" id="login" style="background-color: #3567A4;">Sign in</button>
+                        </form>
+                     
                 </div>
             </div>
         </div>
     </div>
 
+<script src="assets/js/vendor/jquery-2.1.4.min.js"></script>
+    <script src="assets/js/vendor/jquery-2.1.4.min.js"></script>
+    <script src="assets/js/popper.min.js"></script>
+    <script src="assets/js/plugins.js"></script>
+    <script src="assets/js/main.js"></script>
+</body>
+</html>
 
-<%@ include file = "main-footer.jsp" %>
-
-
+	</body>
+	</html>

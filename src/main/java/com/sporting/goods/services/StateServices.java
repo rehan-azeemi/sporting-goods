@@ -16,4 +16,8 @@ public class StateServices {
 	public List<State> getAllStates(){
 		return stateRepository.findAll();
 	}
+	
+	public String getStateName(Integer stateId) {
+		return stateRepository.findByStateId(Long.valueOf(stateId)).getStateName();
+	}
 }

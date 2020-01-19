@@ -8,4 +8,5 @@ import com.sporting.goods.model.State;
 
 public interface StateRepository extends CrudRepository<State, Long>{
 	public List<State> findAll();
+	public State findByStateId(Long stateId);
 }

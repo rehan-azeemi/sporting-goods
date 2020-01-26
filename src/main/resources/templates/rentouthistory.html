@@ -79,16 +79,16 @@ tr.shown td.details-control {
 					</a></li>
 					<h3 class="menu-title">Sporting Goods Menu</h3>
 					<li th:if="${#request.isUserInRole('ROLE_ADMIN')}" ><a th:href="@{/employee}"> <i
-							class="menu-icon fa fa-laptop"></i>Employee
+							class="menu-icon fa fa-laptop"></i>User Management
 					</a></li>
 					<li><a th:href="@{/rentout}"> <i
-							class="menu-icon fa fa-laptop"></i>Rent Out
+							class="menu-icon fa fa-laptop"></i>Add Customer
 					</a></li>
 					<li><a th:href="@{/rentouthistory}"> <i
-							class="menu-icon fa fa-laptop"></i>Rent Out History
+							class="menu-icon fa fa-laptop"></i>Customer History
 					</a></li>
 					<li><a th:href="@{/atomicski/export}"> <i
-							class="menu-icon fa fa-laptop"></i>Export Customer Emails
+							class="menu-icon fa fa-laptop"></i>Export Customer Data
 					</a></li>
 				</ul>
 			</div>

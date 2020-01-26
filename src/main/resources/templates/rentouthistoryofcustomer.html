@@ -79,16 +79,16 @@ tr.shown td.details-control {
 					</a></li>
 					<h3 class="menu-title">Sporting Goods Menu</h3>
 					<li th:if="${#request.isUserInRole('ROLE_ADMIN')}" ><a th:href="@{/employee}"> <i
-							class="menu-icon fa fa-laptop"></i>Employee
+							class="menu-icon fa fa-laptop"></i>User Management
 					</a></li>
 					<li><a th:href="@{/rentout}"> <i
-							class="menu-icon fa fa-laptop"></i>Rent Out
+							class="menu-icon fa fa-laptop"></i>Add Customer
 					</a></li>
 					<li><a th:href="@{/rentouthistory}"> <i
-							class="menu-icon fa fa-laptop"></i>Rent Out History
+							class="menu-icon fa fa-laptop"></i>Customer History
 					</a></li>
 					<li><a th:href="@{/atomicski/export}"> <i
-							class="menu-icon fa fa-laptop"></i>Export Customer Emails
+							class="menu-icon fa fa-laptop"></i>Export Customer Data
 					</a></li>
 				</ul>
 			</div>
@@ -121,7 +121,7 @@ tr.shown td.details-control {
 			<div class="col-lg-12">
 				<div class="card">
 					<div class="card-header">
-						<strong class="card-title">All Customers Rentout History</strong>
+						<strong class="card-title">All Customers History</strong>
 					</div>
 					<input id="atomicSkiId" type="hidden" th:value="${atomicski}"/>
 					<div class="card-body">
@@ -265,7 +265,12 @@ tr.shown td.details-control {
                  } else {
                      // Open this row
                      row.child(format(row.data())).show();
-                     getStateNameWithStateId(row.data().stateId,'s');
+                     if(row.data().otherThanUsa){
+                    	 $("#stId").text("N/A");
+                     }
+                     else{
+                    	 getStateNameWithStateId(row.data().stateId,'s');
+                     }
              	    	getStateNameWithStateId(row.data().drivingLicenseStateId,'d');
                      tr.addClass('shown');
                  }
@@ -282,6 +287,12 @@ tr.shown td.details-control {
 	            + '<td>'+d.phone+'</td>'
 	            + '<td><b>Address</b></td>'
 	            + '<td>'+d.address+'</td>'
+	            + '</tr>'
+	            + '<tr>'
+	            + '<td><b>Other Than USA</b></td>'
+	            + '<td>'+(d.otherThanUsa?"Yes":"No")+'</td>'
+	            + '<td><b>Province</b></td>'
+	            + '<td>'+(d.otherThanUsa?d.province:"N/A")+'</td>'
 	            + '</tr>'
 	            + '<tr>'
 	            + '<td><b>Email</b></td>'

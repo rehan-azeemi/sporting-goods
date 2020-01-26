@@ -83,17 +83,17 @@ tr.shown td.details-control {
 							class="menu-icon fa fa-dashboard"></i>Dashboard
 					</a></li>
 					<h3 class="menu-title">Sporting Goods Menu</h3>
-					<li th:if="${#request.isUserInRole('ROLE_ADMIN')}"><a
-						th:href="@{/employee}"> <i class="menu-icon fa fa-laptop"></i>Employee
+					<li th:if="${#request.isUserInRole('ROLE_ADMIN')}" ><a th:href="@{/employee}"> <i
+							class="menu-icon fa fa-laptop"></i>User Management
 					</a></li>
 					<li><a th:href="@{/rentout}"> <i
-							class="menu-icon fa fa-laptop"></i>Rent Out
+							class="menu-icon fa fa-laptop"></i>Add Customer
 					</a></li>
 					<li><a th:href="@{/rentouthistory}"> <i
-							class="menu-icon fa fa-laptop"></i>Rent Out History
+							class="menu-icon fa fa-laptop"></i>Customer History
 					</a></li>
 					<li><a th:href="@{/atomicski/export}"> <i
-							class="menu-icon fa fa-laptop"></i>Export Customer Emails
+							class="menu-icon fa fa-laptop"></i>Export Customer Data
 					</a></li>
 				</ul>
 			</div>
@@ -126,86 +126,86 @@ tr.shown td.details-control {
 
 			<div class="col-lg-12">
 				<div class="card">
-					<form th:action="@{/export/excel}" method="post">
+					<form th:action="@{/export/excel}" method="post" th:object="${atomicSki}">
 						<div class="card-header">
-							<small>Export </small>Excel
+							<small>Export </small>Customers Data
 						</div>
 						<div class="card-body card-block">
 							<div class="row form-group">
 								<div class="col-2">
 									<div class="form-check">
 										<input class="form-check-input" type="checkbox" value=""
-											id="defaultCheck1"> <label class="form-check-label"
-											for="defaultCheck1"> First Name </label>
+											id="defaultCheck1" th:field="*{firstName}"> <label class="form-check-label"
+											for="defaultCheck1" > First Name </label>
 									</div>
 								</div>
 								<div class="col-2">
 									<div class="form-check">
 										<input class="form-check-input" type="checkbox" value=""
-											id="defaultCheck1"> <label class="form-check-label"
-											for="defaultCheck1"> Last Name </label>
+											id="defaultCheck1" th:field="*{lastName}"> <label class="form-check-label"
+											for="defaultCheck1" > Last Name </label>
 									</div>
 								</div>
 								<div class="col-2">
 									<div class="form-check">
 										<input class="form-check-input" type="checkbox" value=""
-											id="defaultCheck1"> <label class="form-check-label"
+											id="defaultCheck1" th:field="*{email}"> <label class="form-check-label"
 											for="defaultCheck1"> Email </label>
 									</div>
 								</div>
 								<div class="col-2">
 									<div class="form-check">
 										<input class="form-check-input" type="checkbox" value=""
-											id="defaultCheck1"> <label class="form-check-label"
+											id="defaultCheck1" th:field="*{city}"> <label class="form-check-label"
 											for="defaultCheck1"> City </label>
 									</div>
 								</div>
 								<div class="col-2">
 									<div class="form-check">
 										<input class="form-check-input" type="checkbox" value=""
-											id="defaultCheck1"> <label class="form-check-label"
+											id="defaultCheck1" th:field="*{age}"> <label class="form-check-label"
 											for="defaultCheck1"> Age </label>
 									</div>
 								</div>
 								<div class="col-2">
 									<div class="form-check">
 										<input class="form-check-input" type="checkbox" value=""
-											id="defaultCheck1"> <label class="form-check-label"
+											id="defaultCheck1" th:field="*{address}"> <label class="form-check-label"
 											for="defaultCheck1"> Address </label>
 									</div>
 								</div>
 								<div class="col-2">
 									<div class="form-check">
 										<input class="form-check-input" type="checkbox" value=""
-											id="defaultCheck1"> <label class="form-check-label"
+											id="defaultCheck1" th:field="*{dateOfBirth}"> <label class="form-check-label"
 											for="defaultCheck1"> Date of Birth </label>
 									</div>
 								</div>
 								<div class="col-2">
 									<div class="form-check">
 										<input class="form-check-input" type="checkbox" value=""
-											id="defaultCheck1"> <label class="form-check-label"
+											id="defaultCheck1" th:field="*{height}"> <label class="form-check-label"
 											for="defaultCheck1"> Height </label>
 									</div>
 								</div>
 								<div class="col-2">
 									<div class="form-check">
 										<input class="form-check-input" type="checkbox" value=""
-											id="defaultCheck1"> <label class="form-check-label"
+											id="defaultCheck1" th:field="*{weight}"> <label class="form-check-label"
 											for="defaultCheck1"> Weight </label>
 									</div>
 								</div>
 								<div class="col-2">
 									<div class="form-check">
 										<input class="form-check-input" type="checkbox" value=""
-											id="defaultCheck1"> <label class="form-check-label"
+											id="defaultCheck1" th:field="*{dateOut}"> <label class="form-check-label"
 											for="defaultCheck1"> Date Out </label>
 									</div>
 								</div>
 								<div class="col-2">
 									<div class="form-check">
 										<input class="form-check-input" type="checkbox" value=""
-											id="defaultCheck1"> <label class="form-check-label"
+											id="defaultCheck1" th:field="*{dateDue}"> <label class="form-check-label"
 											for="defaultCheck1"> Date Due </label>
 									</div>
 								</div>
@@ -213,134 +213,141 @@ tr.shown td.details-control {
 								<div class="col-2">
 									<div class="form-check">
 										<input class="form-check-input" type="checkbox" value=""
-											id="defaultCheck1"> <label class="form-check-label"
+											id="defaultCheck1" th:field="*{downHillSkiingLevel}"> <label class="form-check-label"
 											for="defaultCheck1"> Downhill Skiing Level </label>
 									</div>
 								</div>
 								<div class="col-2">
 									<div class="form-check">
 										<input class="form-check-input" type="checkbox" value=""
-											id="defaultCheck1"> <label class="form-check-label"
+											id="defaultCheck1" th:field="*{snowboardStance}"> <label class="form-check-label"
 											for="defaultCheck1"> Snowboard Stance </label>
 									</div>
 								</div>
 								<div class="col-2">
 									<div class="form-check">
 										<input class="form-check-input" type="checkbox" value=""
-											id="defaultCheck1"> <label class="form-check-label"
+											id="defaultCheck1" th:field="*{bootIdNo}"> <label class="form-check-label"
 											for="defaultCheck1"> Boot ID </label>
 									</div>
 								</div>
 								<div class="col-2">
 									<div class="form-check">
 										<input class="form-check-input" type="checkbox" value=""
-											id="defaultCheck1"> <label class="form-check-label"
+											id="defaultCheck1" th:field="*{poleCode}"> <label class="form-check-label"
 											for="defaultCheck1"> Pole Code </label>
 									</div>
 								</div>
 								<div class="col-2">
 									<div class="form-check">
 										<input class="form-check-input" type="checkbox" value=""
-											id="defaultCheck1"> <label class="form-check-label"
+											id="defaultCheck1" th:field="*{soleLength}"> <label class="form-check-label"
 											for="defaultCheck1"> Sole Length </label>
 									</div>
 								</div>
 								<div class="col-2">
 									<div class="form-check">
 										<input class="form-check-input" type="checkbox" value=""
-											id="defaultCheck1"> <label class="form-check-label"
+											id="defaultCheck1" th:field="*{skiBoardIdNo}"> <label class="form-check-label"
 											for="defaultCheck1"> Ski Board ID </label>
 									</div>
 								</div>
 								<div class="col-2">
 									<div class="form-check">
 										<input class="form-check-input" type="checkbox" value=""
-											id="defaultCheck1"> <label class="form-check-label"
+											id="defaultCheck1"  th:field="*{state}"> <label class="form-check-label"
 											for="defaultCheck1"> State Name </label>
 									</div>
 								</div>
 								<div class="col-2">
 									<div class="form-check">
 										<input class="form-check-input" type="checkbox" value=""
-											id="defaultCheck1"> <label class="form-check-label"
+											id="defaultCheck1"  th:field="*{equipmentSubtotal}"> <label class="form-check-label"
 											for="defaultCheck1"> Equipment Subtotal </label>
 									</div>
 								</div>
 								<div class="col-2">
 									<div class="form-check">
 										<input class="form-check-input" type="checkbox" value=""
-											id="defaultCheck1"> <label class="form-check-label"
+											id="defaultCheck1" th:field="*{equipmentProtectionDamage}"> <label class="form-check-label"
 											for="defaultCheck1"> Damage Protection </label>
 									</div>
 								</div>
 								<div class="col-2">
 									<div class="form-check">
 										<input class="form-check-input" type="checkbox" value=""
-											id="defaultCheck1"> <label class="form-check-label"
+											id="defaultCheck1" th:field="*{total}"> <label class="form-check-label"
 											for="defaultCheck1"> Total </label>
 									</div>
 								</div>
 								<div class="col-2">
 									<div class="form-check">
 										<input class="form-check-input" type="checkbox" value=""
-											id="defaultCheck1"> <label class="form-check-label"
+											id="defaultCheck1" th:field="*{visualIndicatorSettings}"> <label class="form-check-label"
 											for="defaultCheck1"> V I Settings </label>
 									</div>
 								</div>
 								<div class="col-2">
 									<div class="form-check">
 										<input class="form-check-input" type="checkbox" value=""
-											id="defaultCheck1"> <label class="form-check-label"
+											id="defaultCheck1" th:field="*{requestedSettings}"> <label class="form-check-label"
 											for="defaultCheck1"> R S Settings </label>
 									</div>
 								</div>
 								<div class="col-2">
 									<div class="form-check">
 										<input class="form-check-input" type="checkbox" value=""
-											id="defaultCheck1"> <label class="form-check-label"
+											id="defaultCheck1" th:field="*{zipCode}"> <label class="form-check-label"
 											for="defaultCheck1"> Zip Code </label>
 									</div>
 								</div>
 								<div class="col-2">
 									<div class="form-check">
 										<input class="form-check-input" type="checkbox" value=""
-											id="defaultCheck1"> <label class="form-check-label"
+											id="defaultCheck1" th:field="*{drivingLicenseNo}"> <label class="form-check-label"
 											for="defaultCheck1"> Driving License No </label>
 									</div>
 								</div>
 								<div class="col-2">
 									<div class="form-check">
 										<input class="form-check-input" type="checkbox" value=""
-											id="defaultCheck1"> <label class="form-check-label"
+											id="defaultCheck1" th:field="*{drivingLicenseState}"> <label class="form-check-label"
 											for="defaultCheck1"> Driving License State </label>
 									</div>
 								</div>
 								<div class="col-2">
 									<div class="form-check">
 										<input class="form-check-input" type="checkbox" value=""
-											id="defaultCheck1"> <label class="form-check-label"
+											id="defaultCheck1" th:field="*{technician}"> <label class="form-check-label"
 											for="defaultCheck1"> Technician </label>
 									</div>
 								</div>
 								<div class="col-2">
 									<div class="form-check">
 										<input class="form-check-input" type="checkbox" value=""
-											id="defaultCheck1"> <label class="form-check-label"
+											id="defaultCheck1" th:field="*{note}"> <label class="form-check-label"
 											for="defaultCheck1"> Note </label>
 									</div>
 								</div>
 								<div class="col-2">
 									<div class="form-check">
 										<input class="form-check-input" type="checkbox" value=""
-											id="defaultCheck1"> <label class="form-check-label"
+											id="defaultCheck1" th:field="*{localAccomodation}"> <label class="form-check-label"
 											for="defaultCheck1"> Local Accomodation </label>
 									</div>
 								</div>
 								<div class="col-2">
 									<div class="form-check">
 										<input class="form-check-input" type="checkbox" value=""
-											id="defaultCheck1"> <label class="form-check-label"
+											id="defaultCheck1" th:field="*{releaseOfSignedLiability}"> <label class="form-check-label"
 											for="defaultCheck1"> Release of Liability </label>
+									</div>
+								</div>
+								<div class="col-2">
+									<div class="form-check">
+										<input class="form-check-input" type="checkbox" value=""
+											id="defaultCheck1" th:field="*{phone}"> <label class="form-check-label"
+											for="defaultCheck1"> Phone </label>
 									</div>
 								</div>
 							</div>

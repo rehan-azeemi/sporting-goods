@@ -124,6 +124,28 @@ public class AtomicSki {
 	
 	@Column
 	private Integer active;
+	
+	@Column
+	private Boolean otherThanUsa;
+	
+	@Column
+	private String province;
+
+	public String getProvince() {
+		return province;
+	}
+
+	public void setProvince(String province) {
+		this.province = province;
+	}
+
+	public Boolean getOtherThanUsa() {
+		return otherThanUsa;
+	}
+
+	public void setOtherThanUsa(Boolean otherThanUsa) {
+		this.otherThanUsa = otherThanUsa;
+	}
 
 	public Employee getLastModifiedBy() {
 		return lastModifiedBy;

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 import com.sporting.goods.model.AtomicSki;
+import com.sporting.goods.model.ExportExcel;
 import com.sporting.goods.services.AtomicSkiServices;
 import com.sporting.goods.services.StateServices;
 
@@ -61,11 +62,15 @@ public class AtomicSkiController {
 	}
 	
 	@GetMapping("/atomicski/export")
-	public ModelAndView generateExcelForAllEmails() {	
-//		if(!atomicSkiServices.generateExcelForEmails()) {
-//			
-//		}
+	public ModelAndView viewExportExcel() {	
 		ModelAndView view = new ModelAndView("exportexcel");
+		view.addObject("atomicSki",new ExportExcel());
 		return view;
+	}
+	
+	@PostMapping("/export/excel")
+	public String generateExcel(@ModelAttribute("atomicSki") ExportExcel atomicSki) {
+		atomicSkiServices.generateExcel(atomicSki);
+		return "redirect:/atomicski/export";
 	}
 }

@@ -27,6 +27,7 @@ import com.sporting.goods.model.AtomicSki;
 import com.sporting.goods.model.AtomicSkiDTO;
 import com.sporting.goods.model.AtomicSkiJRBean;
 import com.sporting.goods.model.Employee;
+import com.sporting.goods.model.ExportExcel;
 import com.sporting.goods.repositories.AtomicSkiRepository;
 import com.sporting.goods.transformer.AtomicSkiTransformer;
 
@@ -80,7 +81,7 @@ public class AtomicSkiServices {
 	public void generateForm(Long id) {
 		try {
 		AtomicSki atomic = atomicSkiRepository.findByAtomicSkiId(id);
-		String dest = "C:\\Forms\\"+atomic.getFirstName()+" "+atomic.getLastName()+"-"+System.currentTimeMillis()+"-report.pdf";
+		String dest = atomic.getFirstName()+" "+atomic.getLastName()+"-"+System.currentTimeMillis()+"-report.pdf";
 		File file = ResourceUtils.getFile("atomicski.jrxml");
 		JasperReport jr = JasperCompileManager.compileReport(file.getAbsolutePath());
 		AtomicSkiJRBean atomicSkiJRBean = AtomicSkiTransformer.convertAtomicSkiToJRBean(atomic);
@@ -100,7 +101,7 @@ public class AtomicSkiServices {
 		}
 	}
 
-	public boolean generateExcelForEmails(){
+	public boolean generateExcel(ExportExcel atomicSkiExcel){
 		try {
 
 			Workbook workbook = new XSSFWorkbook(); 
@@ -112,12 +113,192 @@ public class AtomicSkiServices {
 	        headerFont.setColor(IndexedColors.RED.getIndex());
 	        CellStyle headerCellStyle = workbook.createCellStyle();
 	        headerCellStyle.setFont(headerFont);
-	        int rowNum = 0;
-	        for(AtomicSki atomicSki: getAllAtomicSkies()) {
-	            Row row = sheet.createRow(rowNum++);
-	            row.createCell(0).setCellValue(atomicSki.getEmail());
+	        int rowNum = 1;
+	        int colNum = 0;
+	        
+	        {
+	        	Row row = sheet.createRow(0);
+	        	if(atomicSkiExcel.isFirstName()) {
+	            	row.createCell(colNum++).setCellValue("First Name");
+	            }
+	            if(atomicSkiExcel.isLastName()) {
+	            	row.createCell(colNum++).setCellValue("Last Name");
+	            }
+	            if(atomicSkiExcel.isAge()) {
+	            	row.createCell(colNum++).setCellValue("Age");
+	            }
+	            if(atomicSkiExcel.isCity()) {
+	            	row.createCell(colNum++).setCellValue("City");
+	            }
+	            if(atomicSkiExcel.isAddress()) {
+	            	row.createCell(colNum++).setCellValue("Address");
+	            }
+	            if(atomicSkiExcel.isPhone()) {
+	            	row.createCell(colNum++).setCellValue("Phone");
+	            }
+	            if(atomicSkiExcel.isEmail()) {
+	            	row.createCell(colNum++).setCellValue("Email");
+	            }
+	            if(atomicSkiExcel.isState()) {
+	            	row.createCell(colNum++).setCellValue("State/Province");
+	            	row.createCell(colNum++).setCellValue("Other Than USA");
+	            }
+	            if(atomicSkiExcel.isDateOfBirth()) {
+	            	row.createCell(colNum++).setCellValue("Date of Birth");
+	            }
+	            if(atomicSkiExcel.isZipCode()) {
+	            	row.createCell(colNum++).setCellValue("Zip Code");
+	            }
+	            if(atomicSkiExcel.isBootIdNo()) {
+	            	row.createCell(colNum++).setCellValue("Boot Id No");
+	            }
+	            if(atomicSkiExcel.isPoleCode()) {
+	            	row.createCell(colNum++).setCellValue("Pole Code");
+	            }
+	            if(atomicSkiExcel.isSoleLength()) {
+	            	row.createCell(colNum++).setCellValue("Sole Length");
+	            }
+	            if(atomicSkiExcel.isSkiBoardIdNo()) {
+	            	row.createCell(colNum++).setCellValue("Ski Board Id No");
+	            }
+	            if(atomicSkiExcel.isDateOut()) {
+	            	row.createCell(colNum++).setCellValue("Date Out");
+	            }
+	            if(atomicSkiExcel.isDateDue()) {
+	            	row.createCell(colNum++).setCellValue("Date Due");
+	            }
+	            
+	            if(atomicSkiExcel.isLocalAccomodation()) {
+	            	row.createCell(colNum++).setCellValue("Local Accomodation");
+	            }
+	            if(atomicSkiExcel.isDrivingLicenseNo()) {
+	            	row.createCell(colNum++).setCellValue("Driving License No");
+	            }
+	            if(atomicSkiExcel.isDrivingLicenseState()) {
+	            	row.createCell(colNum++).setCellValue("Driving License State");
+	            }
+	            if(atomicSkiExcel.isEquipmentSubtotal()) {
+	            	row.createCell(colNum++).setCellValue("Subtotal");
+	            }
+	            if(atomicSkiExcel.isEquipmentProtectionDamage()) {
+	            	row.createCell(colNum++).setCellValue("Damage Protection");
+	            }
+	            if(atomicSkiExcel.isTotal()) {
+	            	row.createCell(colNum++).setCellValue("Total");
+	            }
+	            if(atomicSkiExcel.isTechnician()) {
+	            	row.createCell(colNum++).setCellValue("Technician");
+	            }
+	            if(atomicSkiExcel.isVisualIndicatorSettings()) {
+	            	row.createCell(colNum++).setCellValue("V I Settings");
+	            }
+	            if(atomicSkiExcel.isRequestedSettings()) {
+	            	row.createCell(colNum++).setCellValue("R Settings");
+	            }
+	            if(atomicSkiExcel.isReleaseOfSignedLiability()) {
+	            	row.createCell(colNum++).setCellValue("Release of Signed Liability");
+	            }
+	            if(atomicSkiExcel.isNote()) {
+	            	row.createCell(colNum++).setCellValue("Note");
+	            }
 	        }
-	        FileOutputStream fileOut = new FileOutputStream("customer-data.xlsx");
+	        
+	        for(AtomicSki atomicSki: getAllAtomicSkies()) {
+	            Row row = sheet.createRow(rowNum);
+	            colNum = 0;
+	            	if(atomicSkiExcel.isFirstName()) {
+		            	row.createCell(colNum++).setCellValue(atomicSki.getFirstName());
+		            }
+		            if(atomicSkiExcel.isLastName()) {
+		            	row.createCell(colNum++).setCellValue(atomicSki.getLastName());
+		            }
+		            if(atomicSkiExcel.isAge()) {
+		            	row.createCell(colNum++).setCellValue(atomicSki.getAge());
+		            }
+		            if(atomicSkiExcel.isCity()) {
+		            	row.createCell(colNum++).setCellValue(atomicSki.getCity());
+		            }
+		            if(atomicSkiExcel.isAddress()) {
+		            	row.createCell(colNum++).setCellValue(atomicSki.getAddress());
+		            }
+		            if(atomicSkiExcel.isPhone()) {
+		            	row.createCell(colNum++).setCellValue(atomicSki.getPhone());
+		            }
+		            if(atomicSkiExcel.isEmail()) {
+		            	row.createCell(colNum++).setCellValue(atomicSki.getEmail());
+		            }
+		            if(atomicSkiExcel.isState()) {
+		            	if(atomicSki.getOtherThanUsa() != null && atomicSki.getOtherThanUsa()) {
+		            		row.createCell(colNum++).setCellValue(atomicSki.getProvince());
+		            		row.createCell(colNum++).setCellValue("Yes");
+		            	}
+		            	else {
+		            		row.createCell(colNum++).setCellValue(stateServices.getStateName(atomicSki.getStateId()));
+		            		row.createCell(colNum++).setCellValue("No");
+		            	}
+		            	
+		            }
+		            if(atomicSkiExcel.isDateOfBirth()) {
+		            	row.createCell(colNum++).setCellValue(atomicSki.getDateOfBirth());
+		            }
+		            if(atomicSkiExcel.isZipCode()) {
+		            	row.createCell(colNum++).setCellValue(atomicSki.getZipCode());
+		            }
+		            if(atomicSkiExcel.isBootIdNo()) {
+		            	row.createCell(colNum++).setCellValue(atomicSki.getBootIdNo());
+		            }
+		            if(atomicSkiExcel.isPoleCode()) {
+		            	row.createCell(colNum++).setCellValue(atomicSki.getPoleCode());
+		            }
+		            if(atomicSkiExcel.isSoleLength()) {
+		            	row.createCell(colNum++).setCellValue(atomicSki.getSoleLength());
+		            }
+		            if(atomicSkiExcel.isSkiBoardIdNo()) {
+		            	row.createCell(colNum++).setCellValue(atomicSki.getSkiBoardIdNo());
+		            }
+		            if(atomicSkiExcel.isDateOut()) {
+		            	row.createCell(colNum++).setCellValue(atomicSki.getDateOut());
+		            }
+		            if(atomicSkiExcel.isDateDue()) {
+		            	row.createCell(colNum++).setCellValue(atomicSki.getDateDue());
+		            }
+		            if(atomicSkiExcel.isLocalAccomodation()) {
+		            	row.createCell(colNum++).setCellValue(atomicSki.getLocalAccomodation());
+		            }
+		            if(atomicSkiExcel.isDrivingLicenseNo()) {
+		            	row.createCell(colNum++).setCellValue(atomicSki.getDrivingLicenseNo());
+		            }
+		            if(atomicSkiExcel.isDrivingLicenseState()) {
+		            	row.createCell(colNum++).setCellValue(stateServices.getStateName(atomicSki.getDrivingLicenseStateId()));
+		            }
+		            if(atomicSkiExcel.isEquipmentSubtotal()) {
+		            	row.createCell(colNum++).setCellValue(atomicSki.getEquipmentSubtotal());
+		            }
+		            if(atomicSkiExcel.isEquipmentProtectionDamage()) {
+		            	row.createCell(colNum++).setCellValue(atomicSki.getEquipmentProtectionDamage());
+		            }
+		            if(atomicSkiExcel.isTotal()) {
+		            	row.createCell(colNum++).setCellValue(atomicSki.getTotal());
+		            }
+		            if(atomicSkiExcel.isTechnician()) {
+		            	row.createCell(colNum++).setCellValue(atomicSki.getTechnician());
+		            }
+		            if(atomicSkiExcel.isVisualIndicatorSettings()) {
+		            	row.createCell(colNum++).setCellValue(atomicSki.getVisualIndicatorSettings());
+		            }
+		            if(atomicSkiExcel.isRequestedSettings()) {
+		            	row.createCell(colNum++).setCellValue(atomicSki.getRequestedSettings());
+		            }
+		            if(atomicSkiExcel.isReleaseOfSignedLiability()) {
+		            	row.createCell(colNum++).setCellValue((atomicSki.getReleaseOfSignedLiability())?"Yes":"No");
+		            }
+		            if(atomicSkiExcel.isNote()) {
+		            	row.createCell(colNum++).setCellValue(atomicSki.getNote());
+		            }
+	            
+	            rowNum++;
+	        }
+	        FileOutputStream fileOut = new FileOutputStream("customer-data-"+System.currentTimeMillis()+".xlsx");
 	        workbook.write(fileOut);
 	        fileOut.close();
 	        workbook.close();

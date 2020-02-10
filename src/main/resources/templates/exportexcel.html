@@ -5,7 +5,7 @@
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>Sporting Goods</title>
+<title>SLS Rental Program</title>
 <meta name="description"
 	content="Lead Smith - Maintain Excel Files Record">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -73,8 +73,7 @@ tr.shown td.details-control {
 					aria-expanded="false" aria-label="Toggle navigation">
 					<i class="fa fa-bars"></i>
 				</button>
-				<a class="navbar-brand" href="./">Atomic Ski</a><a
-					class="navbar-brand hidden" href="./"></a>
+				<a class="navbar-brand" href="/employee"><img th:src="@{/images/fish.png}" /></a>
 			</div>
 
 			<div id="main-menu" class="main-menu collapse navbar-collapse">
@@ -82,7 +81,7 @@ tr.shown td.details-control {
 					<li class="active"><a href="#"> <i
 							class="menu-icon fa fa-dashboard"></i>Dashboard
 					</a></li>
-					<h3 class="menu-title">Sporting Goods Menu</h3>
+					<h3 class="menu-title">SLS Rental Program</h3>
 					<li th:if="${#request.isUserInRole('ROLE_ADMIN')}" ><a th:href="@{/employee}"> <i
 							class="menu-icon fa fa-laptop"></i>User Management
 					</a></li>

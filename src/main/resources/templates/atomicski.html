@@ -5,7 +5,7 @@
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>Sporting Goods</title>
+<title>SLS Rental Program</title>
 <meta name="description"
 	content="Lead Smith - Maintain Excel Files Record">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -73,8 +73,7 @@ tr.shown td.details-control {
 					aria-expanded="false" aria-label="Toggle navigation">
 					<i class="fa fa-bars"></i>
 				</button>
-				<a class="navbar-brand" href="./">Atomic Ski</a><a
-					class="navbar-brand hidden" href="./"></a>
+				<a class="navbar-brand" href="/employee"><img th:src="@{/images/fish.png}" /></a>
 			</div>
 
 			<div id="main-menu" class="main-menu collapse navbar-collapse">
@@ -82,7 +81,7 @@ tr.shown td.details-control {
 					<li class="active"><a href="#"> <i
 							class="menu-icon fa fa-dashboard"></i>Dashboard
 					</a></li>
-					<h3 class="menu-title">Sporting Goods Menu</h3>
+					<h3 class="menu-title">SLS Rental Program</h3>
 					<li th:if="${#request.isUserInRole('ROLE_ADMIN')}"><a
 						th:href="@{/employee}"> <i class="menu-icon fa fa-laptop"></i>User
 							Management
@@ -124,6 +123,47 @@ tr.shown td.details-control {
 			</div>
 		</header>
 		<div class="content mt-3">
+		
+					<div class="col-lg-12">
+				<div class="card">
+					<div class="card-header">
+						<strong class="card-title">Customer Latest Record</strong>
+					</div>
+					<div class="card-body">
+						<div class="table-responsive">
+							<table id="atomic-ski-data-table"
+								class="table table-striped table-bordered">
+								<thead>
+									<tr>
+										<th>First Name</th>
+										<th>Last Name</th>
+										<th>Email</th>
+										<th>Phone</th>
+										
+										<th>Action</th>
+										<th>Action</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr th:each="atmski : ${atomicskies}">
+										<td th:text="${atmski.firstName}"></td>
+										<td th:text="${atmski.lastName}"></td>
+										<td th:text="${atmski.email}"></td>
+										<td th:text="${atmski.phone}"></td>
+										
+										<td><a
+											th:href="@{/atomicski/fetch/{id}(id=${atmski.atomicSkiId})}"
+											class="btn btn-danger btn-sm">Fetch</a></td>
+										<td><a
+											th:href="@{/pdf/{id}(id=${atmski.atomicSkiId})}"
+											class="btn btn-danger btn-sm">Pull</a></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
 
 			<div class="col-lg-12">
 				<div class="card">
@@ -185,7 +225,13 @@ tr.shown td.details-control {
 											th:value="${state.stateId}" th:utext="${state.stateName}"></option>
 									</select>
 								</div>
-								<div class="form-group col-md-4" id="province">
+								<div class="form-group col-md-2" id="country">
+									<label for="inputState">Country</label>
+									<input type="text"
+										class="form-control" name="country" placeholder="Country"
+										th:field="*{country}">
+								</div>
+								<div class="form-group col-md-2" id="province">
 									<label for="inputState">Province</label>
 									<input type="text"
 										class="form-control" name="province" placeholder="Province"
@@ -387,41 +433,6 @@ tr.shown td.details-control {
 				</div>
 			</div>
 
-			<div class="col-lg-12">
-				<div class="card">
-					<div class="card-header">
-						<strong class="card-title">Customer Latest Record</strong>
-					</div>
-					<div class="card-body">
-						<div class="table-responsive">
-							<table id="atomic-ski-data-table"
-								class="table table-striped table-bordered">
-								<thead>
-									<tr>
-										<th>First Name</th>
-										<th>Last Name</th>
-										<th>Email</th>
-										<th>Phone</th>
-										<th>Action</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr th:each="atmski : ${atomicskies}">
-										<td th:text="${atmski.firstName}"></td>
-										<td th:text="${atmski.lastName}"></td>
-										<td th:text="${atmski.email}"></td>
-										<td th:text="${atmski.phone}"></td>
-										<td><a
-											th:href="@{/atomicski/fetch/{id}(id=${atmski.atomicSkiId})}"
-											class="btn btn-danger btn-sm">Fetch</a></td>
-									</tr>
-								</tbody>
-							</table>
-						</div>
-					</div>
-				</div>
-			</div>
-
 		</div>
 
 
@@ -508,7 +519,7 @@ tr.shown td.details-control {
 					dte = $('#dob').val().split("-");
 					$('#age').val(
 							calculate_age(new Date(parseInt(dte[2]),
-									parseInt(dte[1]), parseInt(dte[0]))));
+									parseInt(dte[0]), parseInt(dte[1]))));
 
 				});
 
@@ -565,17 +576,16 @@ tr.shown td.details-control {
 					$("#total").val(subtotal + damage);
 				});
 		
-		
-		$("#province").hide();
-		
 		$("#otherThanUsa").change(function() {
 		    if(this.checked) {
 		        $("#province").show();
+		        $("#country").show();
 		        $("#state").hide();
 		    }
 		    else{
 		    	$("#state").show();
 		    	$("#province").hide();
+		    	$("#country").hide();
 		    }
 		});
 	</script>
@@ -583,6 +593,18 @@ tr.shown td.details-control {
 		$('#dob').datepicker('setDate', 'today');
 		$('#dateOut').datepicker('setDate', 'today');
 		$('#dateDue').datepicker('setDate', 'today');
+		$("#province").hide();
+		$("#country").hide();
+	</script>
+	<script th:if="${atomicski.atomicSkiId != null && atomicski.otherThanUsa}">
+		$("#province").show();
+    	$("#country").show();
+    	$("#state").hide();
+	</script>
+	<script th:if="${atomicski.atomicSkiId != null && !atomicski.otherThanUsa}">
+		$("#province").hide();
+    	$("#country").hide();
+    	$("#state").show();
 	</script>
 </body>
 </html>

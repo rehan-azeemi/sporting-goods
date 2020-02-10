@@ -30,4 +30,11 @@ public class State {
 	public void setStateName(String stateName) {
 		this.stateName = stateName;
 	}
+	
+	public boolean isSelected(Integer stateId){
+        if (stateId != null) {
+            return (stateId.intValue() == this.stateId.intValue())?true:false;
+        }
+        return false;
+    }
 }

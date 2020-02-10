@@ -78,22 +78,28 @@ public class AtomicSkiServices {
 		return atomicSkiRepository.findLogsById(id);
 	}
 	
-	public void generateForm(Long id) {
+	public void generateForm(Long id,boolean export,String dest) {
 		try {
 		AtomicSki atomic = atomicSkiRepository.findByAtomicSkiId(id);
-		String dest = atomic.getFirstName()+" "+atomic.getLastName()+"-"+System.currentTimeMillis()+"-report.pdf";
 		File file = ResourceUtils.getFile("atomicski.jrxml");
 		JasperReport jr = JasperCompileManager.compileReport(file.getAbsolutePath());
 		AtomicSkiJRBean atomicSkiJRBean = AtomicSkiTransformer.convertAtomicSkiToJRBean(atomic);
-		atomicSkiJRBean.setState(stateServices.getStateName(atomic.getStateId()));
+		if(atomic.getOtherThanUsa()) {
+			atomicSkiJRBean.setState(atomic.getProvince());
+		}
+		else {
+			atomicSkiJRBean.setState(stateServices.getStateName(atomic.getStateId()));
+		}
 		atomicSkiJRBean.setLicState(stateServices.getStateName(atomic.getDrivingLicenseStateId()));
 		ArrayList<AtomicSkiJRBean> list = new ArrayList<>();
 		list.add(atomicSkiJRBean);
 		JRBeanCollectionDataSource ds = new JRBeanCollectionDataSource(list);
 		Map<String,Object> map = new HashMap<String,Object>();
 		JasperPrint jp = JasperFillManager.fillReport(jr, map,ds);
-		JasperExportManager.exportReportToPdfFile(jp,dest);
-		JasperPrintManager.printReport(jp, false);
+		if(export) {
+			JasperExportManager.exportReportToPdfFile(jp,dest);
+			JasperPrintManager.printReport(jp, false);
+		}
 		JasperPrintManager.printReport(jp, false);
 		}
 		catch(Exception e) {
@@ -140,8 +146,9 @@ public class AtomicSkiServices {
 	            	row.createCell(colNum++).setCellValue("Email");
 	            }
 	            if(atomicSkiExcel.isState()) {
-	            	row.createCell(colNum++).setCellValue("State/Province");
 	            	row.createCell(colNum++).setCellValue("Other Than USA");
+	            	row.createCell(colNum++).setCellValue("State/Province");
+	            	row.createCell(colNum++).setCellValue("Country");
 	            }
 	            if(atomicSkiExcel.isDateOfBirth()) {
 	            	row.createCell(colNum++).setCellValue("Date of Birth");
@@ -229,12 +236,14 @@ public class AtomicSkiServices {
 		            }
 		            if(atomicSkiExcel.isState()) {
 		            	if(atomicSki.getOtherThanUsa() != null && atomicSki.getOtherThanUsa()) {
-		            		row.createCell(colNum++).setCellValue(atomicSki.getProvince());
 		            		row.createCell(colNum++).setCellValue("Yes");
+		            		row.createCell(colNum++).setCellValue(atomicSki.getProvince());
+		            		row.createCell(colNum++).setCellValue((atomicSki.getCountry() == null)?"":atomicSki.getCountry());
 		            	}
 		            	else {
-		            		row.createCell(colNum++).setCellValue(stateServices.getStateName(atomicSki.getStateId()));
 		            		row.createCell(colNum++).setCellValue("No");
+		            		row.createCell(colNum++).setCellValue(stateServices.getStateName(atomicSki.getStateId()));
+		            		
 		            	}
 		            	
 		            }
@@ -298,7 +307,7 @@ public class AtomicSkiServices {
 	            
 	            rowNum++;
 	        }
-	        FileOutputStream fileOut = new FileOutputStream("customer-data-"+System.currentTimeMillis()+".xlsx");
+	        FileOutputStream fileOut = new FileOutputStream("Ski Rental Records/customer-data-"+System.currentTimeMillis()+".xlsx");
 	        workbook.write(fileOut);
 	        fileOut.close();
 	        workbook.close();

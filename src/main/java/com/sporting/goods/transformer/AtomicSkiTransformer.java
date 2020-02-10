@@ -87,7 +87,7 @@ public class AtomicSkiTransformer {
 	}
 	
 	private static String convertDateToFormat(String date) {
-		return date.substring(6,10)+"-"+date.substring(3,5)+"-"+date.substring(0,2);
+		return date.substring(6,10)+"-"+date.substring(0,2)+"-"+date.substring(3,5);
 	}
 	
 }

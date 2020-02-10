@@ -41,8 +41,10 @@ public class AtomicSkiController {
 	
 	@PostMapping("/atomicski/save")
 	public String saveAtomicSki(@ModelAttribute("atomicski") AtomicSki atomicSki) {
+		String dest = "Ski Rental Contracts/"+atomicSki.getFirstName()+" "+atomicSki.getLastName()+"-"+System.currentTimeMillis()+"-report.pdf";
+		atomicSki.setFilePath(dest);
 		Long id = atomicSkiServices.saveAtomicSki(atomicSki);
-		atomicSkiServices.generateForm(id);
+		atomicSkiServices.generateForm(id,true,dest);
 		return "redirect:/rentout";
 	}
 	
@@ -59,6 +61,12 @@ public class AtomicSkiController {
 		ModelAndView view = new ModelAndView("rentouthistoryofcustomer");
 		view.addObject("atomicski", atomicSkiId);
 		return view;
+	}
+	
+	@GetMapping("/atomicski/print/{atomicSkiId}")
+	public String printForm(@PathVariable Long atomicSkiId) {
+		atomicSkiServices.generateForm(atomicSkiId,false,"");
+		return "redirect:/rentout";
 	}
 	
 	@GetMapping("/atomicski/export")

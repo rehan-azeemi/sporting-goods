@@ -130,6 +130,28 @@ public class AtomicSki {
 	
 	@Column
 	private String province;
+	
+	@Column
+	private String country;
+	
+	@Column
+	private String filePath;
+	
+	public String getFilePath() {
+		return filePath;
+	}
+
+	public void setFilePath(String filePath) {
+		this.filePath = filePath;
+	}
+
+	public String getCountry() {
+		return country;
+	}
+
+	public void setCountry(String country) {
+		this.country = country;
+	}
 
 	public String getProvince() {
 		return province;

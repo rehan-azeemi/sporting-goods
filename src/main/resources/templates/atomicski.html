@@ -289,15 +289,20 @@ tr.shown td.details-control {
 										class="form-control" name="height" placeholder="Height"
 										th:field="*{height}">
 								</div>
-								<div class="form-group col-md-3">
-									<label for="inputZip">Birthdate</label> <input type="text"
-										class="form-control" name="dateOfBirth" id="dob"
-										th:field="*{dateOfBirth}">
-								</div>
-								<div class="form-group col-md-3">
+<!-- 								<div class="form-group col-md-3"> -->
+<!-- 									<label for="inputZip">Birthdate</label> <input type="text" -->
+<!-- 										class="form-control" name="dateOfBirth" id="dob" -->
+<!-- 										th:field="*{dateOfBirth}"> -->
+<!-- 								</div> -->
+<!-- 								<div class="form-group col-md-3"> -->
+<!-- 									<label for="inputZip">Age</label> <input type="text" -->
+<!-- 										class="form-control" name="age" placeholder="age" id="age" -->
+<!-- 										readonly="readonly" th:field="*{age}"> -->
+<!-- 								</div> -->
+								<div class="form-group col-md-6">
 									<label for="inputZip">Age</label> <input type="text"
 										class="form-control" name="age" placeholder="age" id="age"
-										readonly="readonly" th:field="*{age}">
+										th:field="*{age}">
 								</div>
 							</div>
 
@@ -509,19 +514,19 @@ tr.shown td.details-control {
 			});
 		});
 
-		$('#dob').datepicker({
+// 		$('#dob').datepicker({
 
-			format : 'mm-dd-yyyy',
-			autoclose : true
-		}).on(
-				'changeDate',
-				function(e) {
-					dte = $('#dob').val().split("-");
-					$('#age').val(
-							calculate_age(new Date(parseInt(dte[2]),
-									parseInt(dte[0]), parseInt(dte[1]))));
+// 			format : 'mm-dd-yyyy',
+// 			autoclose : true
+// 		}).on(
+// 				'changeDate',
+// 				function(e) {
+// 					dte = $('#dob').val().split("-");
+// 					$('#age').val(
+// 							calculate_age(new Date(parseInt(dte[2]),
+// 									parseInt(dte[0]), parseInt(dte[1]))));
 
-				});
+// 				});
 
 		$('#dob').trigger('changeDate');
 
@@ -539,12 +544,12 @@ tr.shown td.details-control {
 
 		});
 
-		function calculate_age(dob) {
-			var diff_ms = Date.now() - dob.getTime();
-			var age_dt = new Date(diff_ms);
+// 		function calculate_age(dob) {
+// 			var diff_ms = Date.now() - dob.getTime();
+// 			var age_dt = new Date(diff_ms);
 
-			return Math.abs(age_dt.getUTCFullYear() - 1970);
-		}
+// 			return Math.abs(age_dt.getUTCFullYear() - 1970);
+// 		}
 
 		$('#atomic-ski-data-table').DataTable({
 			"paging" : true,
@@ -590,7 +595,7 @@ tr.shown td.details-control {
 		});
 	</script>
 	<script th:if="${atomicski.atomicSkiId == null}">
-		$('#dob').datepicker('setDate', 'today');
+		//$('#dob').datepicker('setDate', 'today');
 		$('#dateOut').datepicker('setDate', 'today');
 		$('#dateDue').datepicker('setDate', 'today');
 		$("#province").hide();

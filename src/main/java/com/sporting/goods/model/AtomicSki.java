@@ -58,8 +58,8 @@ public class AtomicSki {
 	@Column
 	private Integer age;
 	
-	@Column
-	private String dateOfBirth;
+	//@Column
+	//private String dateOfBirth;
 	
 	@Column
 	private String weight;
@@ -305,13 +305,13 @@ public class AtomicSki {
 		this.age = age;
 	}
 
-	public String getDateOfBirth() {
-		return dateOfBirth;
-	}
-
-	public void setDateOfBirth(String dateOfBirth) {
-		this.dateOfBirth = dateOfBirth;
-	}
+//	public String getDateOfBirth() {
+//		return dateOfBirth;
+//	}
+//
+//	public void setDateOfBirth(String dateOfBirth) {
+//		this.dateOfBirth = dateOfBirth;
+//	}
 
 	public String getWeight() {
 		return weight;
@@ -463,7 +463,7 @@ public class AtomicSki {
 				+ ", city=" + city + ", phone=" + phone + ", address=" + address + ", email=" + email + ", stateId="
 				+ stateId + ", zipCode=" + zipCode + ", canWeContact=" + canWeContact + ", localAccomodation="
 				+ localAccomodation + ", drivingLicenseNo=" + drivingLicenseNo + ", drivingLicenseStateId="
-				+ drivingLicenseStateId + ", age=" + age + ", dateOfBirth=" + dateOfBirth + ", weight=" + weight
+				+ drivingLicenseStateId + ", age=" + age + ", dateOfBirth=" + ", weight=" + weight
 				+ ", height=" + height + ", downHillSkiingLevel=" + downHillSkiingLevel + ", snowboardStance="
 				+ snowboardStance + ", bootIdNo=" + bootIdNo + ", soleLength=" + soleLength + ", skiBoardIdNo="
 				+ skiBoardIdNo + ", poleCode=" + poleCode + ", dateOut=" + dateOut + ", dateDue=" + dateDue

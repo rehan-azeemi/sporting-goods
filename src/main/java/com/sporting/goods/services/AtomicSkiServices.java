@@ -247,9 +247,9 @@ public class AtomicSkiServices {
 		            	}
 		            	
 		            }
-		            if(atomicSkiExcel.isDateOfBirth()) {
-		            	row.createCell(colNum++).setCellValue(atomicSki.getDateOfBirth());
-		            }
+//		            if(atomicSkiExcel.isDateOfBirth()) {
+//		            	row.createCell(colNum++).setCellValue(atomicSki.getDateOfBirth());
+//		            }
 		            if(atomicSkiExcel.isZipCode()) {
 		            	row.createCell(colNum++).setCellValue(atomicSki.getZipCode());
 		            }
